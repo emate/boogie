@@ -7,7 +7,7 @@ Boogie, pure Python HTTP error server.
 But... what for?
 ======
 
-Modern applications often depends on remote resources, but sometimes nobody thinks, what's gonna happen when remote-site misbehaves.
+Modern applications often depend on remote resources, but sometimes there is one unknown. What's gonna happen when remote-site misbehaves?
 Using Boogie server, you can test how your application behaves when some HTTP connection trouble appears.
 
 Usage
