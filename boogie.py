@@ -5,6 +5,9 @@ import time
 import urlparse
 import os
 import argparse
+import base64
+import socket
+
 
 
 """ Boogie, one file pure Python implementation of basic HTTP server acting as remote resource.
@@ -44,8 +47,23 @@ class Handler(BaseHTTPRequestHandler, RequestWrapper):
         sleep_time = int(self.get_parameter('sleep', 0))
         time.sleep(sleep_time)
         self.send_response(ret_code)
+        if self.get_parameter('slowconn', False):
+            size_of_data = int(self.get_parameter('size', 10))*1024
+            self.send_header('Content-Length', size_of_data)
         self.end_headers()
-        if self.get_parameter('ret_data', False):
+        if self.get_parameter('slowconn', False):
+            size_of_data = int(self.get_parameter('size', 10)*1024)
+            transfer_in_kbps = int(self.get_parameter('rate', 1))
+            data_transfered = 0
+            interval = 0.1
+            while data_transfered < size_of_data:
+                size_to_gen = int(transfer_in_kbps*1024*interval)
+                data = os.urandom(int(transfer_in_kbps*1024*interval))
+                self.wfile.write(data + '0\r\n\r\n')
+                data_transfered += len(data)
+                print data_transfered
+                time.sleep(interval)
+        elif self.get_parameter('ret_data', False):
             message =  threading.currentThread().getName()
             self.wfile.write("<html><body>Default return data for GET on %s with HTTP return code: %s</body></html>"%(self.path, ret_code))
             self.wfile.write('\n')
