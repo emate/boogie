@@ -19,7 +19,7 @@ python boogie.py [-p PORT] [-l BIND_ADDRESS]
 There are plenty of parameters, that you can use to simulate desired response. Parameters are send in query string of request, after ? (question mark) line in regular HTTP GET request.
 
 <pre>
-[address_of_server]:[port]/?par1name=par1value&par2name=par2value...
+&lt;address_of_server&gt;:&lt;port&gt;/?par1name=par1value&par2name=par2value...
 </pre>
 
 ##### Available parameters:
