@@ -61,7 +61,6 @@ class Handler(BaseHTTPRequestHandler, RequestWrapper):
                 data = os.urandom(int(transfer_in_kbps*1024*interval))
                 self.wfile.write(data + '0\r\n\r\n')
                 data_transfered += len(data)
-                print data_transfered
                 time.sleep(interval)
         elif self.get_parameter('ret_data', False):
             message =  threading.currentThread().getName()
