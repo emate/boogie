@@ -1,0 +1,11 @@
+{
+    "/app/*":  { 
+        "code": 301,
+        "sleep": 1.5
+    },
+    "default":  { 
+        "code": 200,
+        "sleep": 1
+    }
+
+}
